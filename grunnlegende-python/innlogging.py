@@ -1,10 +1,11 @@
+import bcrypt
 from getpass import getpass
 
-users: dict[str,str] = {
+users: dict[str,bytes] = {
     # username:password
-    "Bruker1":"passord1",
-    "Bruker2":"aaaaaaaaaa",
-    "benjamin":"chinese"
+    "Bruker1": bcrypt.hashpw(b"passord1", bcrypt.gensalt()), 
+    "Bruker2": bcrypt.hashpw(b"aaaaaaaaaa", bcrypt.gensalt()), 
+    "benjamin": bcrypt.hashpw(b"chinese", bcrypt.gensalt()),
 }
 
 currentUser: str | None = None
@@ -12,7 +13,12 @@ currentUser: str | None = None
 def login(username:str, password: str) -> bool:
     global currentUser
 
-    if users.get(username) == password:
+    hashed_password: bytes | None = users.get(username)
+
+    if hashed_password == None:
+        return False
+
+    if bcrypt.checkpw(password.encode("utf-8"),hashed_password):
         currentUser = username
         return True
 

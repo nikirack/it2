@@ -1,0 +1,8 @@
+[project]
+name = "it2"
+version = "0.1.0"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "bcrypt>=5.0.0",
+]
