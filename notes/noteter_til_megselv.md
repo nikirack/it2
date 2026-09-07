@@ -1,0 +1,3 @@
+python.analysis.inlayHints.variableTypes
+python.analysis.inlayHints.pytestParameters
+python.analysis.inlayHints.functionReturnTypes
